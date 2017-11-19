@@ -1,49 +1,15 @@
-<style>
-html, body {
-    tab-size: 4;
-}
-
-p {
-    text-align: justify;
-}
-
-img {
-    display: block;
-    margin: auto;
-}
-
-h1, h2 {
-    text-align: center;
-}
-
-h6 {
-    text-align: center;
-    font-style: italic;
-}
-link {
-    text-align: center;
-}
-</style>
-
 # Urządzenia peryferyjne
-## Prowadzący:
-# dr inż. Jan Nikodem
-Studenci:<br>
-_Rodziewicz Bartosz_
-_Ormaniec Wojciech_
+## Czytnik kart chipowych
+#### Prowadzący:
+* dr inż. Jan Nikodem
 
-## Spis treści
-1. [Wstęp](#1-wstep)
-2. [Zadania z listy](#2-zadania-do-wykonania)
-    1. [Uruchomienie przykładowej aplikacji](#uruchomienie-przykadowej-aplikacji)
-    2. [Obsługa kart SIM za pomocą aplikacji SimEditor](#uruchomienie-simeditora)
-    3. [Obsługa kart SIM przy pomocy komend APDU](#uruchomienie-przykadowej-aplikacji_1)
-        1. [zapoznać się z komendami APDU do kart SIM]()
-        2. [zalogować się do karty SIM]()
-        3. [odczytać wybrany plik z karty SIM lub z książki telefonicznej]()
-    4. [Napisać własną aplikację komunikującą się z kartą chipową za pomocą standardu PC/SC](#nasza-aplikacja)
-3. [Wnioski](#3-wnioski)
-4. [Źródła](#4-zrodla)
+#### Autorzy:
+Grupa F
+* _Rodziewicz Bartosz, 226105_  
+* _Ormaniec Wojciech, 226181_
+
+#### Termin:
+13 listopad 2017, 7:30
 
 ## 1. Wstęp
 Karty chipowe które używaliśmy podczas laboratorium, są kartami używanymi w telefonach mobilnych - komórkowych. Mieliśmy dostępne trzy karty **SIM** na których pracowaliśmy podczas zajęć. Niestety po zajęciach nie byliśmy w stanie testować działania programu, ponieważ nie mieliśmy dostępu do czytnika kart chipowych, jednak program który przygotowaliśmy na zajęcia działał i sądzę, że pozostałe poprawki byłyby kosmetyczne więc nie powinny wpływać na działanie aplikacji.
@@ -52,26 +18,27 @@ Karty chipowe które używaliśmy podczas laboratorium, są kartami używanymi w
 
 > Karta chipowa to uniwersalny nośnik danych w postaci karty wykonanej z plastiku z umieszczonym na niej (lub wewnątrz niej) jednym lub kilkoma układami scalonymi (czipami), które pozwalają na ochronę procesu logowania użytkownika, kontrolę dostępu i zawartych na niej danych. Może być odczytywana za pomocą urządzeń automatycznych, np. przy zawieraniu i rozliczaniu transakcji finansowych oraz w kasach cyfrowych.
 
-Karty chipowe są aktualnie popularnie używane w wielu dziedzinach, takich jak telefonia, bankowość czy nawet legitymacje studenckie. Karty chipowe, zwane również stykowymi, są kartami wyposażonymi w elektroniczny układ umożliwiający przechowywanie danych. Elektroniczne karty stykowe (`ISO 7816`) można podzielić na dwie grupy: karty pamięciowe, zawierające pamięć do przechowywania danych oraz karty procesorowe. 
-<br>
-Podczas pracy z SC [Smart Card] natkneliśmy się na zagadnienie **ATR**, co po rozszyforwaniu oznacza `Answer To Reset`. Służy on do komunikacji z kartą SC i podąża za standardem `ISO/IEC 7816`. ATR przekazuje informacje o parametrach komunikacji zaproponowanych przez kartę oraz o stanie karty oraz jej charakterze.
-<br>
+Karty chipowe są aktualnie popularnie używane w wielu dziedzinach, takich jak telefonia, bankowość czy nawet legitymacje studenckie. Karty chipowe, zwane również stykowymi, są kartami wyposażonymi w elektroniczny układ umożliwiający przechowywanie danych. Elektroniczne karty stykowe (`ISO 7816`) można podzielić na dwie grupy: karty pamięciowe, zawierające pamięć do przechowywania danych oraz karty procesorowe.
+
+Podczas pracy z SC [Smart Card] natknęliśmy się na zagadnienie **ATR**, co po rozszyfrowaniu oznacza `Answer To Reset`. Służy on do komunikacji z kartą SC i podąża za standardem `ISO/IEC 7816`. ATR przekazuje informacje o parametrach komunikacji zaproponowanych przez kartę oraz o stanie karty oraz jej charakterze.
+
 **APDU** -  struktura danych w protokole komunikacji między czytnikiem a kartą elektroniczną (np. między telefonem a kartą SIM). Struktura ramki APDU zdefiniowana jest w ISO/IEC 7816-4.  
 Istnieją 2 kategorie APDU: polecenie APDU (od czytnika do karty) oraz odpowiedź APDU (od karty do czytnika). Polecenie APDU składa się z obowiązkowego nagłówka (4 bajty na pola: CLA, INS, P1, P2) i z opcjonalnej liczby danych (od 0 do 255 bajtów). Odpowiedź APDU stanowią 2 bajty statusowe oraz od 0 do 256 bajtów z danymi.
 
 ![](Tabelka.png)
-###### Żródło: [https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit](https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit)
+
+**Źródło:** [https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit](https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit)
 
 ## 2. Zadania do wykonania
 ### Uruchomienie przykładowej aplikacji
-Aplikacja o której mowa zostanie omówiona w trzecim punkcie - []()
+Aplikacja o której mowa zostanie omówiona w trzecim punkcie
 
 ### Uruchomienie SimEditor'a
 Próbując odpalić wspomniany program, wystąpiły wielokrotne problemy, które jak się okazało, wynikały z niezgodoności karty z programem.
 
 ### Uruchomienie przykładowej aplikacji
 
-Podczas pracy z aplikacją wykorzystywaliśmy dokumentację standardu `ISO 7816-4`. Klasa naszej karty to `A0`, co używam jako pierwszą informację przesyłaną w wiadomości (np: 
+Podczas pracy z aplikacją wykorzystywaliśmy dokumentację standardu `ISO 7816-4`. Klasa naszej karty to `A0`, co używam jako pierwszą informację przesyłaną w wiadomości (np:
 ```CPP
 BYTE SELECT_SMS[] = { 0xA0, 0xA4, 0x00, 0x00, 0x02, 0x6F, 0x3C };
 ```
@@ -84,7 +51,7 @@ i otrzymaliśmy:
 
 ## Nasza aplikacja
 
-Nasza aplikacja nie posiada interfejsu graficznego, jednak używa konsoli aby porozumiewać się z użytkownikiem. Okazało się to nadzwyczaj niefortunne i napewno nie powtórzy się w przyszłych zadaniach, język C++ okazał się słabym wyborem do stworzenia apliakcji (dużo pracy, mało efektów).<br>
+Nasza aplikacja nie posiada interfejsu graficznego, jednak używa konsoli aby porozumiewać się z użytkownikiem. Okazało się to nadzwyczaj niefortunne i na pewno nie powtórzy się w przyszłych zadaniach, język C++ okazał się słabym wyborem do stworzenia aplikacji (dużo pracy, mało efektów).
 
 ### Aplikacja
 Osobiście uważam, że najłatwiejszym sposobem opisania aplikacji jest opisania jej fragmentów kodu.
@@ -100,7 +67,7 @@ Osobiście uważam, że najłatwiejszym sposobem opisania aplikacji jest opisani
     }
     else printf("success\n");
 ```
-Tworzymy kontekst (zgodnie z przykładem z MSDN [https://msdn.microsoft.com/en-us/library/windows/desktop/aa379479(v=vs.85).aspx]). Jeżeli połączenie zawiedzie, zwróci nam `error code`, a jeżeli się uda `SCARD_S_SUCCESS`.
+Tworzymy kontekst (zgodnie z przykładem z MSDN https://msdn.microsoft.com/en-us/library/windows/desktop/aa379479(v=vs.85).aspx). Jeżeli połączenie zawiedzie, zwróci nam `error code`, a jeżeli się uda `SCARD_S_SUCCESS`.
 
 ```cpp
     printf("SCardListReaders : ");
@@ -153,7 +120,7 @@ Wypisanie listy czytników, a następnie zebranie odpowiedzi użytkownika, aby c
     else printf("success\n");
 ```
 
-Nawiązanie połączenia z kartą zgodnie z : [https://msdn.microsoft.com/pl-pl/library/windows/desktop/aa379473(v=vs.85).aspx], gdzie `&mszReaders[iReaders[iReader]]` to jest nasz wybrany czytnik kart.
+Nawiązanie połączenia z kartą zgodnie z: https://msdn.microsoft.com/pl-pl/library/windows/desktop/aa379473(v=vs.85).aspx, gdzie `&mszReaders[iReaders[iReader]]` to jest nasz wybrany czytnik kart.
 
 ### Przesyłanie danych
 
@@ -161,13 +128,14 @@ Nawiązanie połączenia z kartą zgodnie z : [https://msdn.microsoft.com/pl-pl/
     struct {
     BYTE
         bCla,   // the instruction class
-        bIns,   // the instruction code 
+        bIns,   // the instruction code
         bP1,    // parameter to the instruction
         bP2,    // parameter to the instruction
         bP3;    // size of I/O transfer
     } CmdBytes;
 ```
-###### Źródło: [https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx]
+
+**Źródło:** https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx
 
 Zgodnie z powyższą definicją structu `BYTE` będziemy przekazywać informację które nas interesują, przykładowo:
 
@@ -189,7 +157,7 @@ Zgodnie z powyższą definicją structu `BYTE` będziemy przekazywać informacj�
     else printf("success\n");
 ```
 
-Zgodnie z : [https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx]
+Zgodnie z: https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx
 
 Akurat w tym wypadku wybieram plik - `0xA4`.
 
@@ -237,16 +205,15 @@ Akurat w tym wypadku wybieram plik - `0xA4`.
 ```
 
 ## 3. Wnioski
-Po wykonaniu zadań, odkryliśmy jak wiele rzeczy trzeba brać pod uwagę, kiedy tworzymy aplikację do obsługi kart chipowych, a prawdopodobnie nawet jeszcze nie wiemy o funkcjonalnościach które można byłoby zaimplementować w takiej aplikacji, albo muszą się w takowej znajdować.<br>
-Nie mniej wykonaliśmy ją w zamyśle spełnienie wymagań zamieszczonych na stronie z ćwiczeniem. Definitywnie część kodu która została zaprezentowana, mogłaby zostać wykonana lepiej - jak chociażby wysyłanie komend, które są prostym przeklejaniem, jednak na potrzeby tego ćwiczenia, preferowaliśmy prostote oraz czytelność (i zgodnośc z dokumentacją **MSDN**).<br>
+Po wykonaniu zadań, odkryliśmy jak wiele rzeczy trzeba brać pod uwagę, kiedy tworzymy aplikację do obsługi kart chipowych, a prawdopodobnie nawet jeszcze nie wiemy o funkcjonalnościach które można byłoby zaimplementować w takiej aplikacji, albo muszą się w takowej znajdować.
+
+Nie mniej wykonaliśmy ją w zamyśle spełnienie wymagań zamieszczonych na stronie z ćwiczeniem. Definitywnie część kodu która została zaprezentowana, mogłaby zostać wykonana lepiej - jak chociażby wysyłanie komend, które są prostym przeklejaniem, jednak na potrzeby tego ćwiczenia, preferowaliśmy prostotę oraz czytelność (i zgodność z dokumentacją **MSDN**).
+
 W obecnym ćwiczeniu, nabyliśmy umiejętności posługiwania się komendami APDU oraz poznaliśmy strukturę przechowywania danych w karcie sim, na której ćwiczenie było oparte.
 
 ## 4. Źródła:
-[https://pl.wikipedia.org/wiki/Karta_elektroniczna](https://pl.wikipedia.org/wiki/Karta_elektroniczna)
-[http://chipcard.pl/karty-chipowe](http://chipcard.pl/karty-chipowe)
-[https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit](https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit)
+* [https://pl.wikipedia.org/wiki/Karta_elektroniczna](https://pl.wikipedia.org/wiki/Karta_elektroniczna)
 
-[https://msdn.microsoft.com/en-us/library/windows/desktop/aa379479(v=vs.85).aspx]:(https://msdn.microsoft.com/en-us/library/windows/desktop/aa379479(v=vs.85).aspx)
-[https://msdn.microsoft.com/pl-pl/library/windows/desktop/aa379473(v=vs.85).aspx]:(https://msdn.microsoft.com/pl-pl/library/windows/desktop/aa379473(v=vs.85).aspx)
-[https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx]:(https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx)
-[https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx]:(https://msdn.microsoft.com/en-us/library/windows/desktop/aa379804(v=vs.85).aspx)
+* [http://chipcard.pl/karty-chipowe](http://chipcard.pl/karty-chipowe)
+
+* [https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit](https://pl.wikipedia.org/wiki/Application_Protocol_Data_Unit)
