@@ -1,0 +1,18 @@
+
+Po pomyślnym uruchomieniu programu oraz połączeniu się z kontrolerem wszystkie funkcje działały prawidłowo. 
+Niestety, gdy dźwignia kontrolera została poruszona pomimo tego, iż puszczona wracała fizycznie do pozycji początkowej to informacje uzyskiwane z kontrolera sugerowały, że nadal jest wychylona w prawym kierunku. 
+Efektem tego przy symulacji działania myszy było samoistne przesuwanie kursora w prawym kierunku. 
+Anomalia występowała na dwóch trzech niezależnych komputerach w tym komputerze znajdującym się pracowni przez co wykluczyliśmy tą przyczynę usterki. 
+Niestety nie udało nam się uruchomić przykładowego programu obsługującego joystick, który znaleźliśmy na stronie internetowej wraz z instrukcją do laboratorium. 
+Chcieliśmy w ten sposób wykluczyć niepoprawność napisanego przez nas kodu. 
+System operacyjny nie posiadał niezbędnych do jego uruchomienia bibliotek - także komputer znajdujący się w sali, w której zostało przeprowadzone laboratorium. 
+W związku z tym zainstalowaliśmy na naszych komputerach oprogramowanie będące zbiorem sterowników oraz aplikacji dostarczone przez producenta do otrzymanego joysticka. 
+
+Podczas instalacji jednym z etapów była możliwość przetestowania wszystkich przycisków oraz co ważniejsze dźwigni joysticka. Efekt tego testu był potwierdzeniem fizycznego uszkodzenia kontrolera. Prawdopodobnie uległ uszkodzeniu w wyniku niewłaściwego wykorzystania przez jedną z porzednich grup, które miały szansę z nim pracować.
+
+Po tym jak przedstawiliśmy prowadzącemu zaistniały problem oraz wyjaśniliśmy sposób działania naszego programu zasugerowano nam abyśmy spróbowali go wykorzystać pomimo uszkodzenia, które można było potraktować w tym wypadku jako niedokładność jaką cechuje się każde z urządzeń w realnym świecie.
+Pierwszym krokiem aby temu sprostać było Wartości te po tym jak się ustaliły stawały się stabilne do czasu kolejnego poruszenia. Były też dość powtarzalne - każdorazowo ustalały się na jednej z kilku możliwościach z wymienionego przedziału. Sugeruje to uszkodzenie czujnika, który sugerowałby niedokładną pracę czujników wykrywających powrót do pionu. Prawdopodobnie zostały uszkodzone na skutek mechanicznego uszkodzenia, lub zabrudzenia.
+Wyjściem w takiej sytuacji jest zastosowanie strefy nieczułości, która polega na ignorowaniu sygnałów jeżeli nie przekraczają wyznaczonego progu. Przyjętym przez nas progiem było najwyższe zaobserwowane nieprawidłowe wyhylenie osi x.
+Niestety na skutek tego, że niedokładność w jednej z osi wynosiła miejscami ponad 30% ogólej skali byliśmy zmuszenia do zastosowania strefy nieczułości także dla osi y w celu zachowania przewidywalności i symetrii w zachowaniu kursora przesuwanego za pomocą kontrolera.
+Po zastosowaniu strefy nieczułości kursor poruszał się w sposób prawidłowy. W związku z tym rozwiązano problem.
+Wnioskiem z tego jest fakt iż podobne strefy nieczułości występują prawdopodobnie w każdym urządzeniu, które służy do przekazywania wartości z świata rzeczywistego do urządzeń cyfrowych i nie tylko.
