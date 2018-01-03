@@ -42,6 +42,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Automation.BDaq;
 using System.IO;
+using System.Windows.Forms;
 
 namespace AI_AsynchronousOneBufferedAI
 {
@@ -59,7 +60,7 @@ namespace AI_AsynchronousOneBufferedAI
 
             // Ilosc probek = 256, Czas akwizycji - 1s, Czas miedzy probkami - 1/256 s, Czestotliwosc probkowania 256 Hz
             // Spelnia Twierdzenie Kotielnikowa-Shannona (badany sygnal ma czestliwosc 100 Hz)
-            int sampleCount = 20000;
+            int sampleCount = 256;
             int convertClkRatePerChan = 1000;
 
             // Step 1: Create a 'BufferedAiCtrl' for buffered AI function.
@@ -101,14 +102,21 @@ namespace AI_AsynchronousOneBufferedAI
                 }
                 Console.WriteLine(" AsynchronousOneBufferedAI is in progress...   any key to quit !\n");
 
+
+                Form1 form = new Form1();
+                form.buffer = bufferedAiCtrl;
+                Application.Run(form);
                 // Step 7: Do anything you are interesting while the device is acquiring data.
-                do
+                /*do
                 {
-                    Thread.Sleep(1000);// do something yourself !
-                } while (!Console.KeyAvailable);
+                    Form1 form = new Form1();
+                    form.buffer = bufferedAiCtrl;
+                    form.ShowDialog();
+                    // do something yourself !
+                } while (!Console.KeyAvailable);*/
 
                 // step 8: Stop the operation if it is running.
-                bufferedAiCtrl.Stop();
+                //bufferedAiCtrl.Stop();
             }
             catch (Exception e)
             {
@@ -120,8 +128,8 @@ namespace AI_AsynchronousOneBufferedAI
             finally
             {
                 // Step 9: close device, release any allocated resource before quit.
-                bufferedAiCtrl.Dispose();
-                Console.ReadKey(false);
+                /*bufferedAiCtrl.Dispose();
+                Console.ReadKey(false);*/
             }
         }
 

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Automation.BDaq;
 
 namespace AI_AsynchronousOneBufferedAI
 {
@@ -14,5 +15,9 @@ namespace AI_AsynchronousOneBufferedAI
         {
             InitializeComponent();
         }
+
+        public BufferedAiCtrl buffer {get; set;}
+
+
     }
 }
