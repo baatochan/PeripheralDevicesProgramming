@@ -1,0 +1,30 @@
+przykadowy plik Bluetooth.
+OBEX (abbreviation of OBject EXchange, also termed IrOBEX) is a communications protocol that facilitates the exchange of binary objects between devices. It is maintained by the Infrared Data Association but has also been adopted by the Bluetooth Special Interest Group and the SyncML wing of the Open Mobile Alliance (OMA). One of OBEX's earliest popular applications was in the Palm III personal digital assistant. This PDA and its many successors use OBEX to exchange business cards, data, even applications.
+
+Although OBEX was initially designed for infrared, it has now been adopted by Bluetooth, and is also used over RS232, USB, WAP, and in devices such as Livescribe smartpens.
+
+OBEX is similar in design and function to HTTP in providing the client with a reliable transport for connecting to a server and may then request or provide objects. But OBEX differs in many important respects:
+
+    HTTP is normally layered above a TCP/IP link. OBEX is commonly implemented on an IrLAP/IrLMP/Tiny TP stack on an IrDA device. In Bluetooth, OBEX is implemented on a Baseband/ACL/L2CAP/RFCOMM stack. Other such "bindings" of OBEX are possible.
+    HTTP uses human-readable text, but OBEX uses binary-formatted type-length-value triplets named "Headers" to exchange information about a request or an object. These are much easier to parse by resource-limited devices.
+    HTTP transactions are inherently stateless; generally a HTTP client opens a connection, makes a single request, receives its response, and either closes the connection or makes other unrelated requests. In OBEX, a single transport connection may bear many related operations. In fact, recent additions to the OBEX specification allow an abruptly closed transaction to be resumed with all state information intact.
+The normal type of radio link used for general data packets using a polling TDMA scheme to arbitrate access. It can carry several different packet types, which are distinguished by:
+
+    length (1, 3, or 5 time slots depending on required payload size)
+    forward error correction (optionally reducing the data rate in favour of reliability)
+    modulation (EDR - enhanced data rate - packets allow up to triple data rate by using a different RF modulation for the payload)
+
+A connection must be explicitly set up and accepted between two devices before packets can be transferred.
+
+ACL packets are retransmitted automatically if unacknowledged, allowing for correction of a radio link that is subject to interference. For isochronous data, the number of retransmissions can be limited by a flush timeout; but without using L2PLAY retransmission and flow control mode or EL2CAP, a higher layer must handle the packet loss.
+
+ACL links are disconnected if there is nothing received for the supervision timeout period; the default timeout is 20 seconds, but this may be modified by the master.
+
+The type of radio link used for voice data. An SCO link is a set of reserved timeslots on an existing ACL link. Each device transmits encoded voice data in the reserved timeslot. There are no retransmissions, but forward error correction can be optionally applied. SCO packets may be sent every 1, 2 or 3 timeslots.
+
+Enhanced SCO (eSCO) links allow greater flexibility in setting up links: they may use retransmissions to achieve reliability, allow a wider variety of packet types, and greater intervals between packets than SCO, thus increasing radio availability for other links.
+Standardised communication between the host stack (e.g., a PC or mobile phone OS) and the controller (the Bluetooth IC). This standard allows the host stack or controller IC to be swapped with minimal adaptation.
+
+There are several HCI transport layer standards, each using a different hardware interface to transfer the same command, event and data packets. The most commonly used are USB (in PCs) and UART (in mobile phones and PDAs).
+
+In Bluetooth devices with simple functionality (e.g., headsets), the host stack and controller can be implemented on the same microprocessor.co

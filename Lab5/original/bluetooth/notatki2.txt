@@ -1,0 +1,186 @@
+biblioteki:
+• winsock2.h – biblioteka zawierająca funkcje umożliwiające tworzenie zaawansowanych połączeń sieciowych.
+• BluetoothAPIs.h – zawiera między innymi funkcje zarządzające urządzeniami Bluetooth, wykrywające adaptery oraz autoryzujące urządzenia.
+• ws2bth.h – rozszerzenia Winsock2 dla BluetoothAPIs
+
+lista funkcji:
+    BluetoothFindFirstRadio(
+        adres struktury BLUETOOTH_FIND_RADIO_PARAMS,
+        adres handlera adaptera
+    ) - znajduje 1. adapter
+
+    BluetoothFindNextRadio(
+        adres struktury HBLUETOOTH_RADIO_FIND,
+        adres handlera adaptera
+    ) - znajduje kolejne adaptery
+
+    BluetoothFindRadioClose(
+        adres handlera adaptera
+    ) - zamyka polaczenie z adapterem
+        
+
+    GetLastError() - zwraca ostatni błąd
+
+    BluetoothGetRadioInfo(
+        handler adaptera,
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void print_adapter_info (HANDLE BThandle, int i) {
+    BluetoothGetRadioInfo(BThandle, &bt_radio_info);
+    wprintf(L"Adapter %d ) ", i);
+    wprintf(L"%s ", bt_radio_info.szName);
+    wprintf(L"MAC: %02x:%02x:%02x:%02x:%02x:%02x ",
+            bt_radio_info.address.rgBytes[1],
+            bt_radio_info.address.rgBytes[0],
+            bt_radio_info.address.rgBytes[2],
+            bt_radio_info.address.rgBytes[3],
+            bt_radio_info.address.rgBytes[4],
+            bt_radio_info.address.rgBytes[5]);
+    wprintf(L"ClassofDevice: 0x%08x ", bt_radio_info.ulClassofDevice);
+    wprintf(L"Manufacturer: 0x%04x\n", bt_radio_info.manufacturer);
+}
+
+int main() {
+
+
+    //struktura z BluetoothAPIs.h:
+    BLUETOOTH_FIND_RADIO_PARAMS bt_find_radio_params = {
+        sizeof(BLUETOOTH_FIND_RADIO_PARAMS)
+    };
+
+    //uchwyty przechowujące znalezione adaptery i urządzenia
+    HBLUETOOTH_RADIO_FIND hbt_radio_find = NULL;
+    HBLUETOOTH_DEVICE_FIND hbt_dev_find = NULL;
+
+    cout << "Szukanie adapterow BT:" << endl;
+
+    hbt_radio_find = BluetoothFindFirstRadio(&bt_find_radio_params, adapters);
+
+    // jesli nic nie znalazlo, to koniec
+    if (hbt_radio_find == NULL) {
+        std::cout << "Brak dostepnych adapterow. Kod bledu: " << GetLastError() << std::endl;
+        return 1;
+    }
+
+    int adapters_found = 1;
+    while (BluetoothFindNextRadio(&hbt_radio_find, &adapters[adapters_found])) {
+        adapters_found++;
+        if (adapters_found == MAX_BT_ADAPTERS-1) {
+            cout << "Podlaczonych jest wiecej niz 10 adapterow BT do komputera.";
+            break;
+        }
+    }
+
+    for (int i = 0; i < adapters_found; i++)
+        print_adapter_info(adapters[i], i);
+    if(!BluetoothFindRadioClose(hbt_radio_find))
+        cout << "Blad zamykania \"BluetoothFindRadioClose(hbt_radio_find)\"." << endl;
+
+    return 0;
+}
+
+

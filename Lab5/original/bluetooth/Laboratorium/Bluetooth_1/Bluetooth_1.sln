@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bluetooth_1", "Bluetooth_1\Bluetooth_1.vcxproj", "{10698890-6830-444A-82A3-BF605C0D6C9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10698890-6830-444A-82A3-BF605C0D6C9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{10698890-6830-444A-82A3-BF605C0D6C9A}.Debug|Win32.Build.0 = Debug|Win32
+		{10698890-6830-444A-82A3-BF605C0D6C9A}.Release|Win32.ActiveCfg = Release|Win32
+		{10698890-6830-444A-82A3-BF605C0D6C9A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
