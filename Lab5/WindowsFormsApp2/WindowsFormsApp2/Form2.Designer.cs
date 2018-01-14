@@ -119,7 +119,7 @@
             this.buttonPair.Name = "buttonPair";
             this.buttonPair.Size = new System.Drawing.Size(75, 23);
             this.buttonPair.TabIndex = 8;
-            this.buttonPair.Text = "Pair this shit";
+            this.buttonPair.Text = "Pair this device";
             this.buttonPair.UseVisualStyleBackColor = true;
             this.buttonPair.Click += new System.EventHandler(this.buttonPair_Click);
             // 
