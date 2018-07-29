@@ -1,5 +1,5 @@
 # Peripheral Devices Programming
-Few apps that are designed to communicate with peripherals (like printer, SIM card reader, etc.) done during peripheral devices (urządzenia peryferyjne) course at the University.
+Few apps that are designed to communicate with peripherals (like printer, SIM card reader, etc.) done during Peripheral Devices course (Urządzenia Peryferyjne) at the university.
 
 Authors: [Wojciech Ormaniec][Github TheMesoria], Bartosz Rodziewicz
 
@@ -12,6 +12,6 @@ Authors: [Wojciech Ormaniec][Github TheMesoria], Bartosz Rodziewicz
 
 A lot of them is not finished/not working. A lot of them is not done by us as well.
 
-Files that are under `\Lab#\original\*` are projects done by others found on the lab pc.
+Files that are under `\Lab#\original\*` are projects done by others found on the lab pc. Together those projects helped us pass this nightmare. I hope someone will find something from here useful.
 
 [Github TheMesoria]: https://github.com/TheMesoria
